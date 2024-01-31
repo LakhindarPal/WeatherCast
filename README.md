@@ -18,9 +18,18 @@ WeatherCast is a simple weather forecast web application that allows users to ge
 - JavaScript
 - OpenWeatherMap API
 
-## Usage
+### Location-Based Weather
 
-To use WeatherCast, simply open the `index.html` file in your web browser. You can then search for weather forecasts by entering a city name in the search bar.
+The app can automatically fetch weather information based on the user's current location. If the browser supports geolocation, the app will prompt the user for permission to access their location. If granted, it will retrieve and display the weather details for their current coordinates.
+
+To use this feature, simply allow the browser to access your location when prompted.
+
+## How to Use
+
+1. Open the app in a supported web browser.
+2. Allow location access when prompted.
+3. Alternatively, manually enter the name of a city in the search bar to get weather information for that location.
+4. Explore the current weather conditions and the forecast.
 
 ## Live Demo
 

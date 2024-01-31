@@ -15,8 +15,13 @@ const elements = {
 const apiKey = "REPLACE_WITH_YOUR_API_KEY";
 let query = "New Delhi, India"; //default city
 
-async function fetchWeather() {
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=metric`;
+// weather 
+async function fetchWeather(coords) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=metric`;
+
+  if (coords) {
+    apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey}&units=metric`;
+  }
 
   const data = await fetch(apiUrl)
     .then(res => res.json());
@@ -29,7 +34,11 @@ async function fetchWeather() {
     return alert("Invalid API key.");
   }
 
-  //display 
+  displayWeather(data);
+}
+
+//display 
+function displayWeather(data) {
   elements.location.innerHTML = `${data.name}<span> As of ${formatTime(data.dt)}</span>`;
   elements.mainIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
   elements.mainIcon.alt = data.weather[0].description;
@@ -52,8 +61,12 @@ async function fetchWeather() {
 }
 
 // forecast
-async function fetchForecast() {
-  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${apiKey}&units=metric`;
+async function fetchForecast(coords) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${apiKey}&units=metric`;
+
+  if (coords) {
+    apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey}&units=metric`;
+  }
 
   const data = await fetch(apiUrl)
     .then(res => res.json());
@@ -66,7 +79,11 @@ async function fetchForecast() {
     return alert("Please use valid api key from https://openweathermap.org/api");
   }
 
-  //display
+  displayForecast(data);
+}
+
+// display 
+function displayForecast(data) {
   elements.forecastList.innerHTML = "";
 
   data.list.forEach(item => {
@@ -126,6 +143,7 @@ function formatTime(epoch) {
   return date.toLocaleTimeString("en-IN");
 }
 
+//function to format date
 function formatDate(epoch) {
   const date = new Date(epoch * 1000);
   const options = {
@@ -160,7 +178,7 @@ elements.forecastList.addEventListener("click", function(event) {
   }
 });
 
-
+//search
 elements.searchBtn.addEventListener("click", () => {
   query = elements.searchInput.value?.trim();
 
@@ -171,7 +189,24 @@ elements.searchBtn.addEventListener("click", () => {
   fetchForecast();
 })
 
+// Get user's current location
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(fetchWeatherByCoords);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+
+    fetchWeather();
+    fetchForecast();
+  }
+}
+
+// Callback function to handle weather data
+function fetchWeatherByCoords(position) {
+  fetchWeather(position.coords);
+  fetchForecast(position.coords);
+}
+
 document.addEventListener("DOMContentLoaded", function() {
-  fetchWeather();
-  fetchForecast();
+  getLocation();
 });
