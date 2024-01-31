@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WeatherCast</title>
+  <meta name="description" content="Explore the latest weather forecast for your location with WeatherCast. Get accurate updates on temperature, humidity, wind speed, and more. Plan your day effectively with real-time weather information.">
+  <meta name="author" content="Lakhindar Pal">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://weathercast.glitch.me">
+  <meta name="twitter:title" content="WeatherCast">
+  <meta name="twitter:description" content="Explore the latest weather forecast for your location with WeatherCast. Get accurate updates on temperature, humidity, wind speed, and more. Plan your day effectively with real-time weather information.">
+  <meta name="twitter:image" content="icons/wide-image-1200x630.webp">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://weathercast.glitch.me">
+  <meta property="og:title" content="WeatherCast">
+  <meta property="og:description" content="Explore the latest weather forecast for your location with WeatherCast. Get accurate updates on temperature, humidity, wind speed, and more. Plan your day effectively with real-time weather information.">
+  <meta property="og:image" content="icons/wide-image-1200x630.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" sizes="512x512" href="icons/android-chrome-icon-512x512.png">
+  <link rel="icon" sizes="192x192" href="icons/android-chrome-icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+
+  <!-- Theme Color and PWA -->
+  <meta name="theme-color" content="#007bff">
+  <link rel="manifest" href="pwa/manifest.json">
+
+  <!-- Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("pwa/sw.js")
+        .then(reg => console.log("Service Worker registered", reg))
+        .catch(err => console.error("Service Worker not registered", err));
+    } else {
+      console.warn("Service Worker not supported in this browser");
+    }
+  </script>
+
+  <!-- Styles and Scripts -->
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+  <header>
+    <img id="logo" src="icons/site-logo-36x36.png" alt="Site Logo" width="36" height="36">
+    <h1>WeatherCast</h1>
+  </header>
+
+  <div id="search">
+    <input type="text" aria-label="Search weather by city name" id="searchInput" placeholder="Enter city name">
+    <button id="searchBtn">Search</button>
+  </div>
+
+  <main>
+    <section id="weather">
+      <h2 id="location">City Name<span> As of 0:00:00 am</span></h2>
+      <div id="summary">
+        <div>
+          <h3 id="temperature">00°C</h3>
+          <h4 id="condition">Condition</h4>
+        </div>
+        <img id="main-icon" src="https://openweathermap.org/img/wn/icon@2x.png" alt="broken clouds" width="100" height="100">
+      </div>
+      <div id="suntime">
+        <p id="sunrise"><strong>Sunrise:</strong> <span>0:00:00 am</span></p>
+        <p id="sunset"><strong>Sunset:</strong> <span>0:00:00 pm</span></p>
+      </div>
+    </section>
+
+    <section id="details">
+      <h2>Weather Today</h2>
+      <ul id="info">
+        <li id="feels-like"><strong>Feels Like:</strong><span>00°C</span></li>
+        <li id="high-temp"><strong>Temp High:</strong><span> 00.00°C</span></li>
+        <li id="low-temp"><strong>Temp Low:</strong><span> 00.00°C</span></li>
+        <li id="pressure"><strong>Pressure:</strong><span> 1013.25 hPa</span></li>
+        <li id="ground-lvl"><strong>Ground Level:</strong><span> 1013.25 hPa</span></li>
+        <li id="sea-lvl"><strong>Sea Level:</strong><span> 1013.25 hPa</span></li>
+        <li id="wind"><strong>Wind:</strong><span> X 0.0 m/s</span></li>
+        <li id="humidity"><strong>Humidity:</strong><span> 00%</span></li>
+        <li id="clouds"><strong>Cloudiness:</strong><span> 0%</span></li>
+        <li id="visibility"><strong>Visibility:</strong><span> 00 km</span></li>
+      </ul>
+    </section>
+
+    <section id="forecast">
+      <h2>5 Day Forecast</h2>
+      <div id="list">
+        <article>
+          <h3 class="time">Day, Jan 00, 00:00 am</h3>
+          <div class="accordion">
+            <p class="temp">🌡️ <span>00.0 °C</span></p>
+            <img class="icon" src="https://openweathermap.org/img/wn/icon@2x.png" alt="few clouds">
+            <p class="pop">💦<span></span> 0 %</p>
+            <p></p>
+          </div>
+          <ul class="panel">
+            <li><strong>Feels Like:</strong><span> 00 °C</span></li>
+            <li><strong>Pressure:</strong><span> 1013.25 hPa</span></li>
+            <li><strong>Wind:</strong><span> 0.0 m/s</span></li>
+            <li><strong>Humidity:</strong><span> 00 %</span></li>
+            <li><strong>Cloudiness:</strong><span> 0 %</span></li>
+            <li><strong>Visibility:</strong><span> 00 km</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by Lakhindar</p>
+  </footer>
+
+</body>
+
+</html>
