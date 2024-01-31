@@ -100,7 +100,7 @@ li,
   font-size: x-large;
 }
 
-#forecast #icon {
+.icon {
   width: auto;
   height: 100%;
 }

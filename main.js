@@ -108,6 +108,8 @@ function displayForecast(data) {
     icon.classList.add("icon");
     icon.src = `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`;
     icon.alt = item.weather[0].description;
+    icon.width = 100;
+    icon.height = 100;
     accordion.appendChild(icon);
 
     // Create p element for precipitation probability
