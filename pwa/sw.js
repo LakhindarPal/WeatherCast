@@ -1,7 +1,7 @@
 // cache for offline use
 self.addEventListener("install", e => {
   e.waitUntil(
-    caches.open("ccy-v1.0.0").then(cache => {
+    caches.open("wc-v1.5.0").then(cache => {
       return cache.addAll([
         "/",
         "/index.html",
